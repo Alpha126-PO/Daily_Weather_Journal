@@ -13,13 +13,8 @@ cursor.execute('''
     )
 ''')
 
-def add_entry():
+def add_entry(date, city, temperature, mood, note):
 
-    date = input('Date (YYYY-MM-DD): ')
-    city = input('City (BKK): ')
-    temperature = float(input('Temperature (K): '))
-    mood = input('Mood (test): ')
-    note = input('Note (test2): ')
     cursor.execute('INSERT INTO entries (date, city, temperature, mood, note) VALUES (?,?,?,?,?)',
                    (date, city, temperature, mood, note))
     conn.commit()
@@ -70,4 +65,3 @@ def delete_entry_by_city():
     conn.commit()
     print('Entry Deleted')
 
-conn.close()
