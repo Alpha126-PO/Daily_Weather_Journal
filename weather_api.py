@@ -1,5 +1,12 @@
 import requests
 
+CITIES = {
+    'กรุงเทพฯ': (13.75, 100.50),
+    'เชียงใหม่': (18.79, 98.99),
+    'ภูเก็ต': (7.89, 98.40),
+    'ขอนแก่น': (16.44, 102.83),
+}
+
 def  get_weather(latitude, longitude):
     try:
         url = 'https://api.open-meteo.com/v1/forecast'

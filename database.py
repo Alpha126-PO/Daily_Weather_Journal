@@ -1,6 +1,8 @@
-import  sqlite3
+import sqlite3
+import os
 
-conn = sqlite3.connect('journal.db')
+db_path = os.path.join(os.path.dirname(__file__), 'journal.db')
+conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS entries (
@@ -22,8 +24,10 @@ def add_entry(date, city, temperature, mood, note):
 
 def get_all_entries():
     cursor.execute('SELECT * FROM entries')
-    for row in cursor.fetchall():
+    rows = cursor.fetchall()
+    for row in rows:
         print(row)
+    return rows
 
 def get_some_entries_city():
     try:
@@ -35,6 +39,7 @@ def get_some_entries_city():
         else:
             for row in result:
              print(row)
+        return result
 
     except sqlite3.Error:
          print('city not found')
@@ -49,9 +54,15 @@ def get_some_entries_date():
         else:
             for row in result:
              print(row)
+        return result
 
     except sqlite3.Error:
          print('date not found')
+
+def delete_entry_all():
+    cursor.execute('DELETE FROM entries')
+    conn.commit()
+    print('Entry Deleted')
 
 def delete_entry_by_date():
     target = input('input your date want to delete (YYYY-MM-DD):')
