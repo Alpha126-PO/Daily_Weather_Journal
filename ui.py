@@ -1,3 +1,4 @@
+import tkinter
 import tkinter as tk
 from select import select
 
@@ -44,6 +45,17 @@ def open_delete_window():
 
     delete_all = tk.Button(delete_window, text='delete all', command=confirm_delete_all, width=20, height=3)
     delete_all.pack(pady=5)
+
+def open_all_data():
+    all_data = tkinter.Toplevel(master=window)
+    all_data.title('all data')
+    all_data.geometry('500x500')
+
+    entries = get_all_entries()
+    for entry in entries:
+        show_all = tk.Label(all_data, text=str(entry))
+        show_all.pack(pady=5)
+
 
 
 
@@ -98,5 +110,8 @@ bottom_add_result.pack(pady=5)
 
 open_delete_button = tk.Button(master=window, text='open delete', command=open_delete_window, width=20, height=3)
 open_delete_button.pack(pady=5)
+
+open_all_data_button = tk.Button(master=window, text='open all data', command=open_all_data, width=20, height=3)
+open_all_data_button.pack(pady=5)
 
 window.mainloop()
